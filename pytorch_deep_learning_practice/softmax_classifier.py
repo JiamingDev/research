@@ -37,38 +37,47 @@ class Net(torch.nn.Module):
         )
 
     def forward(self, x):
+        # 该数据图片像素尺寸为28*28=784，所以这样转后正好一行代表一张图片
         x = x.view(-1, 784)
         return self.net(x)
-model=Net()
-#该函数可以完成
-#1.softmax(把最后得到的10个数转为概率，满足每个数>=0且和为1)，
-#2.取log
-#3.nllloss
-criterion=torch.nn.CrossEntropyLoss()
-#monetum:能够记忆历史梯度，并自动调节参数更新速度，
+
+
+model = Net()
+# 该函数可以完成
+# 1.softmax(把最后得到的10个数转为概率，满足每个数>=0且和为1)，
+# 2.取log
+# 3.nllloss
+criterion = torch.nn.CrossEntropyLoss()
+# monetum:能够记忆历史梯度，并自动调节参数更新速度，
 # 若某个参数连着朝一个方向更新了好几次，就加快它的更新速度
-optimizer=torch.optim.SGD(model.parameters(),lr=0.01,momentum=0.5)
+optimizer = torch.optim.SGD(model.parameters(), lr=0.01, momentum=0.5)
+
+
 def train():
-    for inputs,target in train_loader:
+    for inputs, target in train_loader:
         optimizer.zero_grad()
-        outputs=model(inputs)
-        loss=criterion(outputs,target)
+        outputs = model(inputs)
+        loss = criterion(outputs, target)
         loss.backward()
         optimizer.step()
+
+
 def test():
-    correct=0
-    total=0 
+    correct = 0
+    total = 0
     with torch.no_grad():
-        for images,labels in test_loader:
-            outputs=model(images)
-            total+=labels.size(0)
-            #_存最大值，predicted存最大值的位置，均为一维，
+        for images, labels in test_loader:
+            outputs = model(images)
+            total += labels.size(0)
+            # _存最大值，predicted存最大值的位置，均为一维，
             # torch.max对每行分别处理
-            _,predicted=torch.max(outputs,dim=1)
-            #注意：tensor.sum()也是返回一个tensor，这是定义规定的
-            #==创建一个bool tensor，元素为每个比较结果，bool型，sum按照0/1统计
-            correct+=(predicted==labels).sum().item()
-    print('accuracy on test set:%.2f %%'%(100*correct/total))
+            _, predicted = torch.max(outputs, dim=1)
+            # 注意：tensor.sum()也是返回一个tensor，这是定义规定的
+            # ==创建一个bool tensor，元素为每个比较结果，bool型，sum按照0/1统计
+            correct += (predicted == labels).sum().item()
+    print("accuracy on test set:%.2f %%" % (100 * correct / total))
+
+
 for epoch in range(10):
     train()
     test()
