@@ -1,5 +1,5 @@
 # deep learning&machine learning学习与实践记录
-## 未来学习方法
+## pytorch未来学习方法
 1. 读相关文献，从数学底层了解深度学习理论
 2. 读pytorch文档，明白pytorch能实现哪些操作
 3. 复现经典工作（读代码，写代码）
