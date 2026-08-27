@@ -1,0 +1,16 @@
+# Python environments
+.venv/
+.venv-d2l/
+
+# Python cache
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Deep learning model weights
+*.pth
+*.pt
+*.ckpt
+
+# Dataset archives
+pytorch_deep_learning_practice/dataset/

@@ -2,6 +2,7 @@
   "python.defaultInterpreterPath": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
   "python.terminal.activateEnvironment": true,
   "python.terminal.activateEnvInCurrentTerminal": true,
+  "python.terminal.executeInFileDir": true,
   "python.analysis.typeCheckingMode": "basic",
   "editor.parameterHints.enabled": true,
   "editor.suggest.showMethods": true,
@@ -11,7 +12,7 @@
   "python.testing.pytestArgs": [
     "."
   ],
-  "jupyter.notebookFileRoot": "${workspaceFolder}",
+  "jupyter.notebookFileRoot": "${fileDirname}",
   "code-runner.runInTerminal": true,
   "code-runner.executorMap": {
     "python": "& \"$pythonPath\" -u"
